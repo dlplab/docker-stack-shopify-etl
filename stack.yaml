@@ -1,0 +1,23 @@
+services:
+  app:
+    # Use the pre-built image from the registry for releases
+    image: gdelapierre/shopify-etl-nodb:latest
+    environment:
+      - ETL_SCHEDULE=${ETL_SCHEDULE}
+      - RUN_ON_STARTUP=${RUN_ON_STARTUP}
+      - SHOPIFY_STORE_DOMAIN=${SHOPIFY_STORE_DOMAIN}
+      - SHOPIFY_API_VERSION=${SHOPIFY_API_VERSION}
+      - SHOPIFY_ADMIN_ACCESS_TOKEN=${SHOPIFY_ADMIN_ACCESS_TOKEN}
+      - PGHOST=${PGHOST}
+      - PGDATABASE=${PGDATABASE}
+      - PGPORT=${PGPORT}
+      - PGUSER=${PGUSER}
+      - PGPASSWORD=${PGPASSWORD}
+      - PGSSL_REJECT_UNAUTHORIZED=${PGSSL_REJECT_UNAUTHORIZED}
+      - PGSSLMODE=${PGSSLMODE}
+    volumes:
+      # Persist the state file in its own dedicated data directory
+      - etl_state:/usr/src/app/data
+
+volumes:
+  etl_state:
