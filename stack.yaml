@@ -1,23 +1,32 @@
-services:
-  app:
-    # Use the pre-built image from the registry for releases
-    image: gdelapierre/shopify-etl-nodb:1.2.0
+    container_name: shopify-etl
+    ports:
+      - "3002:3002"
     environment:
-      - ETL_SCHEDULE=${ETL_SCHEDULE}
-      - RUN_ON_STARTUP=${RUN_ON_STARTUP}
       - SHOPIFY_STORE_DOMAIN=${SHOPIFY_STORE_DOMAIN}
-      - SHOPIFY_API_VERSION=${SHOPIFY_API_VERSION}
+      - SHOPIFY_API_VERSION=${SHOPIFY_API_VERSION:-2025-10}
       - SHOPIFY_ADMIN_ACCESS_TOKEN=${SHOPIFY_ADMIN_ACCESS_TOKEN}
       - PGHOST=${PGHOST}
+      - PGPORT=${PGPORT:-5432}
       - PGDATABASE=${PGDATABASE}
-      - PGPORT=${PGPORT}
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
-      - PGSSL_REJECT_UNAUTHORIZED=${PGSSL_REJECT_UNAUTHORIZED}
-      - PGSSLMODE=${PGSSLMODE}
+      - PGSSLMODE=${PGSSLMODE:-prefer}
+      - PGSSL_REJECT_UNAUTHORIZED=${PGSSL_REJECT_UNAUTHORIZED:-true}
+      - PGSSLROOTCERT=/etc/ssl/dlplab-root-ca.pem
+      - TZ=${TZ:-Australia/Brisbane}
+      - ETL_SCHEDULE=0 * * * *
+      - RUN_ON_STARTUP=false
+      - ETL_PORT=3002
+      # Database initialization settings
+      - RUN_DB_INIT=${RUN_DB_INIT:-false}
+      - DB_ADMIN_USER=${DB_ADMIN_USER:-postgres}
+      - DB_ADMIN_PASSWORD=${DB_ADMIN_PASSWORD}
+      - DB_ADMIN_DB=${DB_ADMIN_DB:-postgres}
+      - DB_ADMIN_ROLE_PASSWORD=${DB_ADMIN_ROLE_PASSWORD}
+      - DB_LOADER_PASSWORD=${DB_LOADER_PASSWORD}
+      - DB_N8N_PASSWORD=${DB_N8N_PASSWORD}
     volumes:
-      # Persist the state file in its own dedicated data directory
-      - etl_state:/usr/src/app/data
-
-volumes:
-  etl_state:
+      - /data/compose/shopify-etl/certs/dlplab-root-ca.pem:/etc/ssl/dlplab-root-ca.pem:ro
+    restart: unless-stopped
+    networks:
+      - shopify-network
