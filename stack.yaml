@@ -5,7 +5,7 @@ networks:
 services:   
   shopify-etl:
     container_name: shopify-etl
-    image: gdelapierre/shopify-etl-nodb:1.2.4 
+    image: gdelapierre/shopify-etl-nodb:1.2.5 
     ports:
       - "3002:3002"
     environment:
@@ -26,7 +26,7 @@ services:
       - ETL_PORT=3002
       # Database initialization settings
       - RUN_DB_INIT=${RUN_DB_INIT:-false}
-      - DB_ADMIN_USER=${DB_ADMIN_USER:-postgres}
+      - DB_ADMIN_USER=${DB_ADMIN_USER:-dbadmin}
       - DB_ADMIN_PASSWORD=${DB_ADMIN_PASSWORD}
       - DB_ADMIN_DB=${DB_ADMIN_DB:-postgres}
       - DB_ADMIN_ROLE_PASSWORD=${DB_ADMIN_ROLE_PASSWORD}
