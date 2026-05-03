@@ -5,7 +5,7 @@ networks:
 services:   
   shopify-etl:
     container_name: shopify-etl
-    image: gdelapierre/shopify-etl-nodb:1.2.1
+    image: gdelapierre/shopify-etl-nodb:1.2.2 
     ports:
       - "3002:3002"
     environment:
@@ -21,7 +21,7 @@ services:
       - PGSSL_REJECT_UNAUTHORIZED=${PGSSL_REJECT_UNAUTHORIZED:-true}
       - PGSSLROOTCERT=${PGSSLROOTCERT}
       - TZ=${TZ:-Australia/Brisbane}
-      - ETL_SCHEDULE=0 * * * *
+      - ETL_SCHEDULE=${ETL_SCHEDULE:-0 * * * *}
       - RUN_ON_STARTUP=false
       - ETL_PORT=3002
       # Database initialization settings
