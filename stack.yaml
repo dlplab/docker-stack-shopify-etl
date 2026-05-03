@@ -5,7 +5,7 @@ networks:
 services:   
   shopify-etl:
     container_name: shopify-etl
-    image: gdelapierre/shopify-etl-nodb:1.2.0
+    image: gdelapierre/shopify-etl-nodb:1.2.1
     ports:
       - "3002:3002"
     environment:
@@ -19,7 +19,7 @@ services:
       - PGPASSWORD=${PGPASSWORD}
       - PGSSLMODE=${PGSSLMODE:-prefer}
       - PGSSL_REJECT_UNAUTHORIZED=${PGSSL_REJECT_UNAUTHORIZED:-true}
-      - PGSSLROOTCERT=/etc/ssl/dlplab-root-ca.pem
+      - PGSSLROOTCERT=${PGSSLROOTCERT}
       - TZ=${TZ:-Australia/Brisbane}
       - ETL_SCHEDULE=0 * * * *
       - RUN_ON_STARTUP=false
