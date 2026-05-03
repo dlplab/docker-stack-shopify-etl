@@ -1,3 +1,9 @@
+networks:
+  shopify-network:
+    driver: bridge
+
+services:   
+  shopify-etl:
     container_name: shopify-etl
     ports:
       - "3002:3002"
