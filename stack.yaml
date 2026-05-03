@@ -1,7 +1,7 @@
 services:
   app:
     # Use the pre-built image from the registry for releases
-    image: gdelapierre/shopify-etl-nodb:latest
+    image: gdelapierre/shopify-etl-nodb:1.2.0
     environment:
       - ETL_SCHEDULE=${ETL_SCHEDULE}
       - RUN_ON_STARTUP=${RUN_ON_STARTUP}
