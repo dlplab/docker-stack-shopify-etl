@@ -22,7 +22,7 @@ services:
       - PGSSLROOTCERT=${PGSSLROOTCERT}
       - TZ=${TZ:-Australia/Brisbane}
       - ETL_SCHEDULE=${ETL_SCHEDULE:-0 * * * *}
-      - RUN_ON_STARTUP=false
+      - RUN_ON_STARTUP=${RUN_ON_STARTUP:-false}
       - ETL_PORT=3002
       # Database initialization settings
       - RUN_DB_INIT=${RUN_DB_INIT:-false}
