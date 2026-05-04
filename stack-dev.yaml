@@ -4,7 +4,7 @@ networks:
 
 services:   
   shopify-etl:
-    container_name: shopify-etl
+    container_name: shopify-etl-dev
     image: gdelapierre/shopify-etl-nodb:1.2.6
     ports:
       - "3002:3002"
