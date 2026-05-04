@@ -5,10 +5,10 @@ networks:
 services:   
   shopify-etl:
     container_name: shopify-etl-dev
-    image: gdelapierre/shopify-etl-nodb:1.2.6
+    image: gdelapierre/shopify-etl-nodb:1.2.8
     environment:
       - SHOPIFY_STORE_DOMAIN=${SHOPIFY_STORE_DOMAIN}
-      - SHOPIFY_API_VERSION=${SHOPIFY_API_VERSION:-2025-10}
+      - SHOPIFY_API_VERSION=${SHOPIFY_API_VERSION:-2026-04}
       - SHOPIFY_ADMIN_ACCESS_TOKEN=${SHOPIFY_ADMIN_ACCESS_TOKEN}
       - PGHOST=${PGHOST}
       - PGPORT=${PGPORT:-5432}
