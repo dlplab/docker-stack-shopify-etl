@@ -1,13 +1,11 @@
 networks:
-  shopify-network:
+  shopify-dev:
     driver: bridge
 
 services:   
   shopify-etl:
     container_name: shopify-etl-dev
     image: gdelapierre/shopify-etl-nodb:1.2.6
-    ports:
-      - "3002:3002"
     environment:
       - SHOPIFY_STORE_DOMAIN=${SHOPIFY_STORE_DOMAIN}
       - SHOPIFY_API_VERSION=${SHOPIFY_API_VERSION:-2025-10}
@@ -35,4 +33,4 @@ services:
       - /data/compose/shopify-etl/certs/dlplab-root-ca.pem:/etc/ssl/dlplab-root-ca.pem:ro
     restart: unless-stopped
     networks:
-      - shopify-network
+      - shopify-dev
