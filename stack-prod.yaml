@@ -5,7 +5,7 @@ networks:
 services:   
   shopify-etl:
     container_name: shopify-etl-prod
-    image: gdelapierre/shopify-etl-nodb:1.8.0
+    image: gdelapierre/shopify-etl-nodb:1.8.1
     environment:
       - SHOPIFY_STORE_DOMAIN=${SHOPIFY_STORE_DOMAIN}
       - SHOPIFY_API_VERSION=${SHOPIFY_API_VERSION:-2026-04}
