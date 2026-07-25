@@ -68,11 +68,15 @@ Set `RUN_DB_INIT=true` on first deploy to a new database. Set back to `false` af
 
 ### Shopify
 
+Two auth modes (from image 1.8.0): **client credentials grant** (preferred — Dev Dashboard app; token auto-refreshed every 24h) or a **static admin token** (legacy fallback). Client credentials win when both are set.
+
 | Variable | Default | Description |
 |---|---|---|
 | `SHOPIFY_STORE_DOMAIN` | required | e.g. `yourstore.myshopify.com` |
 | `SHOPIFY_API_VERSION` | `2025-10` | Shopify Admin API version |
-| `SHOPIFY_ADMIN_ACCESS_TOKEN` | required | Custom app Admin API token |
+| `SHOPIFY_CLIENT_ID` | — | Dev Dashboard app client ID (client credentials grant) |
+| `SHOPIFY_CLIENT_SECRET` | — | Dev Dashboard app secret, `shpss_…` (client credentials grant) |
+| `SHOPIFY_ADMIN_ACCESS_TOKEN` | — | Static custom-app admin token — fallback when client credentials are unset |
 
 ### PostgreSQL (ETL runtime user)
 

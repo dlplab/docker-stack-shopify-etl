@@ -5,10 +5,13 @@ networks:
 services:   
   shopify-etl:
     container_name: shopify-etl-dev
-    image: gdelapierre/shopify-etl-nodb:1.7.0
+    image: gdelapierre/shopify-etl-nodb:1.8.0
     environment:
       - SHOPIFY_STORE_DOMAIN=${SHOPIFY_STORE_DOMAIN}
       - SHOPIFY_API_VERSION=${SHOPIFY_API_VERSION:-2026-04}
+      # Auth: client credentials grant (preferred) — falls back to the static token if unset
+      - SHOPIFY_CLIENT_ID=${SHOPIFY_CLIENT_ID}
+      - SHOPIFY_CLIENT_SECRET=${SHOPIFY_CLIENT_SECRET}
       - SHOPIFY_ADMIN_ACCESS_TOKEN=${SHOPIFY_ADMIN_ACCESS_TOKEN}
       - PGHOST=${PGHOST}
       - PGPORT=${PGPORT:-5432}
